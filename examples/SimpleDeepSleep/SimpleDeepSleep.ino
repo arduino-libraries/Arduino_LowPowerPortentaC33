@@ -1,20 +1,29 @@
 #include "LowPower.h"
 
 #define SLEEP_PIN 0
-#define WAKE_PIN A0
+#define WAKE_PIN A3
 
-LowPower lowPower = LowPower();
+LowPower lowPower;
 
 
 void goToSleep(){
-    lowPower.sleep(); // lowPower.deepSleep();
+    lowPower.deepSleep(); // lowPower.deepSleep();
 }
 
 void setup(){
+    lowPower = LowPower();
     attachInterrupt(digitalPinToInterrupt(SLEEP_PIN), goToSleep, RISING);
-    lowPower.setWakeupPin(WAKE_PIN);
+    lowPower.enableWakeupFromPin(WAKE_PIN);
+    pinMode(LED_BUILTIN, OUTPUT);
+
+    
+
 }
 
 void loop(){
-    // do something
+    digitalWrite(LED_BUILTIN, HIGH);
+    lowPower.delay(100);
+    digitalWrite(LED_BUILTIN, LOW);
+    lowPower.delay(100);
+
 }

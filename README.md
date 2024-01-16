@@ -1,8 +1,9 @@
 # Portenta C33 Low Power Library
+
 This library provides access to the low power functionality of the Renesas RA6M5 microcontroller used in the Portenta C33 Boards and provides three sleep modes:
-    *  **Automatic sleep** - This puts the board in a low-power state everytime `delay()` is called. While in this state, the board uses 43% less power than it normally would.
-    *  **Sleep** - This should bring the power usage to ~12mA. When you wake up from sleep the execution of your program resumes from where it stopped.
-    *  **Deep Seep** - In this mode the board can use as little as ~2mA and can wake up either from an RTC alarm or from an Intrerupt Pin. When waking up from this mode however, the board will be restarted, effectivelly running `void setup()` again. 
+    *  **Automatic sleep** - This puts the board in a low-power state everytime `delay()` is called. While in this state, the board uses around 20% less power than it normally would.
+    *  **Sleep** - This should bring the power usage to about half. When you wake up from sleep the execution of your program resumes from where it stopped.
+    *  **Deep Seep** - In this mode the board can use as little as ~100uA and can wake up either from an RTC alarm or from an Intrerupt Pin. When waking up from this mode however, the board will be restarted, effectivelly running `void setup()` again. 
 
 # Usage
 ## Select a wakeup source
@@ -27,13 +28,14 @@ Here is a list of the usable interrupts:
 
 
 ### RTC Alarm
-To make your board wake up on an RTC alarm you simply need to call `lowPower.setWakeupRTC()` and it will enable that functionality 
+To make your board wake up on an RTC alarm you simply need to call `lowPower.setWakeupRTC()` and it will enable that functionality .
 
 
 ## Put your board to sleep
 To put your board to sleep or deepsleep simply call `lowPower.sleep()` or  `lowPower.deepSleep()`
 
 
-
+## Known limitations
+Automatic sleep doesn't currently work together with the other sleep modes.
 
 
