@@ -1,9 +1,10 @@
 # Portenta C33 Low Power Library
 
 This library provides access to the low power functionality of the Renesas RA6M5 microcontroller used in the Portenta C33 Boards and provides three sleep modes:
-    *  **Automatic sleep** - This puts the board in a low-power state everytime `delay()` is called. While in this state, the board uses around 20% less power than it normally would.
-    *  **Sleep** - This should bring the power usage to about half. When you wake up from sleep the execution of your program resumes from where it stopped.
-    *  **Deep Seep** - In this mode the board can use as little as ~100uA and can wake up either from an RTC alarm or from an Intrerupt Pin. When waking up from this mode however, the board will be restarted, effectivelly running `void setup()` again. 
+*  **Automatic sleep** - This puts the board in a low-power state everytime `delay()` is called. While in this state, the board uses around 20% less power than it normally would.
+*  **Sleep** - This should bring the power usage to about half. When you wake up from sleep the execution of your program resumes from where it stopped.
+*  **Deep Seep** - In this mode the board can use as little as ~100uA and can wake up either from an RTC alarm or from an Intrerupt Pin. When waking up from this mode however, the board will be restarted, effectivelly running `void setup()` again. 
+
 
 # Usage
 ## Select a wakeup source
