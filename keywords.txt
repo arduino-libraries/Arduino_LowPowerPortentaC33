@@ -1,0 +1,26 @@
+#######################################
+# Syntax Coloring Map for Arduino_AdvancedAnalog
+#######################################
+
+#######################################
+# Class (KEYWORD1)
+#######################################
+
+LowPower	KEYWORD1
+
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+sleep	KEYWORD2
+deepSleep	KEYWORD2
+enableWakeupFromPin KEYWORD2
+enableWakeupFromRTC KEYWORD2
+delay
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+

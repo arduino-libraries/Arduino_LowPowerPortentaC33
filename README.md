@@ -1,5 +1,8 @@
 # Portenta C33 Low Power Library
 
+[![Check Arduino](https://github.com/cristidragomir97/Arduino_Portenta_C33_LowPower/actions/workflows/check-arduino.yml/badge.svg)](https://github.com/cristidragomir97/Arduino_Portenta_C33_LowPower/actions/workflows/check-arduino.yml) [![Compile Examples](https://github.com/cristidragomir97/Arduino_Portenta_C33_LowPower/actions/workflows/compile-examples.yml/badge.svg)](https://github.com/cristidragomir97/Arduino_Portenta_C33_LowPower/actions/workflows/compile-examples.yml) [![Spell Check](https://github.com/cristidragomir97/Arduino_Portenta_C33_LowPower/actions/workflows/spell-check.yml/badge.svg)](https://github.com/cristidragomir97/Arduino_Portenta_C33_LowPower/actions/workflows/spell-check.yml) [![Sync Labels](https://github.com/cristidragomir97/Arduino_Portenta_C33_LowPower/actions/workflows/sync-labels.yml/badge.svg)](https://github.com/cristidragomir97/Arduino_Portenta_C33_LowPower/actions/workflows/sync-labels.yml)
+
+
 This library provides access to the low power functionality of the Renesas RA6M5 microcontroller used in the Portenta C33 Boards and provides three sleep modes:
 *  **Automatic sleep** - This puts the board in a low-power state everytime `delay()` is called. While in this state, the board uses around 20% less power than it normally would.
 *  **Sleep** - This should bring the power usage to about half. When you wake up from sleep the execution of your program resumes from where it stopped.
