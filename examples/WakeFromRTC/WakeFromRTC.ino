@@ -1,18 +1,18 @@
 
 
 #include "RTC.h"
-#include "LowPower.h"
+#include "Arduino_Portenta_C33_LowPower.h"
 
 LowPower lowPower;
 
 
-RTCTime initial_time(1, Month::JANUARY, 2000, 12, 10, 00, DayOfWeek::TUESDAY, SaveLight::SAVING_TIME_ACTIVE);
+RTCTime initialTime(1, Month::JANUARY, 2000, 12, 10, 00, DayOfWeek::TUESDAY, SaveLight::SAVING_TIME_ACTIVE);
 
 
 void alarmCallback()
 {
   digitalWrite(LED_BUILTIN, LOW);
-  delay(500);
+  delay(1000);
   digitalWrite(LED_BUILTIN, HIGH);
     lowPower.deepSleep();
 }
@@ -20,14 +20,15 @@ void alarmCallback()
 
 void setup(){
     lowPower = LowPower();
-    lowPower.enableWakeupFromRTC(&initialTime, &callback);
+   // lowPower.enableWakeupFromRTC(&initialTime, &callback);
     lowPower.enableWakeupFromRTC();
 
     pinMode(LED_BUILTIN, OUTPUT);
+    digitalWrite(LED_BUILTIN, HIGH);
 
     RTC.begin();
 
-    if (!RTC.isRunning()) RTC.setTime(initial_time);
+    if (!RTC.isRunning()) RTC.setTime(initialTime);
 
     // Trigger the alarm every time the seconds are zero
     RTCTime alarmTime;
