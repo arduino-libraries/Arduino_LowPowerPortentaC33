@@ -2,7 +2,8 @@
 ## Measurements
 Here's an overview of the reduction in power usage that you can expect from this library:
 #### Sleep Mode with peripherals off
-#### Deep Sleep Mode with peripherals ff
+#### Deep Sleep Mode with peripherals off
+![](https://raw.githubusercontent.com/cristidragomir97/Arduino_Portenta_C33_LowPower/main/extras/results/deep_sleep_no_peripherals.jpeg)
 #### Sleep Mode with peripherals on
 #### Deep Sleep Mode with peripherals on
 
