@@ -22,4 +22,4 @@ The Portenta C33 Low Power Library is a library designed to optimize power consu
 > [!NOTE]  
 > Note, this library reduces the power usage of the microcontroller, not the entire board and it's peripherals (Wi-Fi module for example). If you would like to reach the maximum power reduction possible for a Portenta C33 board, please use the [Arduino PowerManagement library](ttps://github.com/cristidragomir97/Arduino_PowerManagement) which allows you to turn off peripherals as well.
 
-For more information about this libraries check the [library documentation]()
+For more information about this libraries check the [library documentation](https://github.com/cristidragomir97/Arduino_Portenta_C33_LowPower/blob/main/docs/README.md) or the [API Reference](https://github.com/cristidragomir97/Arduino_Portenta_C33_LowPower/blob/main/docs/api.md)
