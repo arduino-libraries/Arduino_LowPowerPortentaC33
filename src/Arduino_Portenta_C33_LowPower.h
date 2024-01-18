@@ -20,22 +20,21 @@ public:
      */
     LowPower();
 
-    void begin();
-
     /**
      * Puts the device into a standard sleep mode.
-     * The device can be woken up by predefined interrupts or conditions.
+     * This sleep mode consumes less power than the active mode but more than the deep sleep mode.
+     * The device will resume execution from the point where it entered the sleep mode.
      */
     void sleep();
 
     /**
      * Puts the device into a deep sleep mode.
-     * The device consumes the least power in this mode but requires specific conditions to wake up.
+     * The device consumes the least power in this mode but will reset when it wakes up effectively running the setup() function again.
      */
     void deepSleep();
 
     /**
-     * Enables wake-up of the device from a specified pin.
+     * Enables wake-up of the device from a specified pin (A0, A1, A2, A3, A4, A5, D4, D7 )
      * @param pin The pin number used for waking up the device.
      * @param direction The direction of the interrupt that will wake up the device. (RISING, FALLING, CHANGE)
      */
@@ -62,7 +61,6 @@ private:
      */
     int getDeepSleepWakeIRQChannelForPin(uint8_t pin);
 
-    int getDeepSleepWakeIRQEdgeForPin(uint8_t pin, PinStatus direction);
 
     // Member variables
     uint16_t deepSleepWakeupSource = 0;
