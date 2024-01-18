@@ -6,22 +6,33 @@ LowPower::LowPower(){
     RenesasLowPowerConfig.output_port_enable = LPM_OUTPUT_PORT_ENABLE_HIGH_IMPEDANCE;
     RenesasLowPowerConfig.io_port_state = LPM_IO_PORT_RESET;
     RenesasLowPowerConfig.low_power_mode = LPM_MODE_DEEP;
-    R_LPM_Open(&RenesasLowPowerControlBlock, &RenesasLowPowerConfig);
+    RenesasLowPowerConfig.standby_wake_sources = LPM_STANDBY_WAKE_SOURCE_IRQ15;
+    RenesasLowPowerConfig.deep_standby_cancel_source = LPM_DEEP_STANDBY_CANCEL_SOURCE_IRQ15;
+  
 }
 
 void LowPower::sleep(){
     RenesasLowPowerConfig.low_power_mode = LPM_MODE_STANDBY;
+    R_LPM_Open(&RenesasLowPowerControlBlock, &RenesasLowPowerConfig);
     R_LPM_LowPowerModeEnter(&RenesasLowPowerControlBlock);
 }
 
 void LowPower::deepSleep(){
     RenesasLowPowerConfig.low_power_mode = LPM_MODE_DEEP;
+    R_LPM_Open(&RenesasLowPowerControlBlock, &RenesasLowPowerConfig);
     R_LPM_LowPowerModeEnter(&RenesasLowPowerControlBlock);
 }
 
 void LowPower::enableWakeupFromRTC(){
-    RenesasLowPowerConfig.deep_standby_cancel_source = LPM_DEEP_STANDBY_CANCEL_SOURCE_RTC_ALARM;
-    RenesasLowPowerConfig.standby_wake_sources =  LPM_STANDBY_WAKE_SOURCE_RTCALM;
+    if(deepSleepWakeupSource == 0)
+        deepSleepWakeupSource = LPM_DEEP_STANDBY_CANCEL_SOURCE_RTC_ALARM;
+    else
+        deepSleepWakeupSource = deepSleepWakeupSource | LPM_DEEP_STANDBY_CANCEL_SOURCE_RTC_ALARM;
+
+    if(standbyWakeupSource == 0)
+        standbyWakeupSource = LPM_STANDBY_WAKE_SOURCE_RTCALM;
+    else
+        standbyWakeupSource = standbyWakeupSource | LPM_STANDBY_WAKE_SOURCE_RTCALM;
 }
  
 bool LowPower::enableWakeupFromPin(uint8_t pin, PinStatus direction){

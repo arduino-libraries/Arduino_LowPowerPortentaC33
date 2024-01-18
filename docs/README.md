@@ -1,11 +1,22 @@
 
 ## Measurements
-Here's an overview of the reduction in power usage that you can expect from this library:
+Here's an overview of the reduction in power usage that you can expect from this library. The screenshots below are taken from the nRF Power Profiler application using a Nordic PPK2 while running the blink sketch on the same board. 
+
+#### Normal operating conditions
+![](https://raw.githubusercontent.com/cristidragomir97/Arduino_Portenta_C33_LowPower/main/extras/results/normal_usage_blink.png)
+
 #### Sleep Mode with peripherals off
+![](https://raw.githubusercontent.com/cristidragomir97/Arduino_Portenta_C33_LowPower/main/extras/results/sleep_no_peripherals.png)
+
 #### Deep Sleep Mode with peripherals off
-![](https://raw.githubusercontent.com/cristidragomir97/Arduino_Portenta_C33_LowPower/main/extras/results/deep_sleep_no_peripherals.jpeg)
+![](https://raw.githubusercontent.com/cristidragomir97/Arduino_Portenta_C33_LowPower/main/extras/results/deep_sleep_no_peripherals.png)
+
+
 #### Sleep Mode with peripherals on
+![](https://raw.githubusercontent.com/cristidragomir97/Arduino_Portenta_C33_LowPower/main/extras/results/sleep_peripherals_on.png)
+
 #### Deep Sleep Mode with peripherals on
+![](https://raw.githubusercontent.com/cristidragomir97/Arduino_Portenta_C33_LowPower/main/extras/results/deep_sleep_peripherals_on.png)
 
 ## Usage
 ### Selecting a wakeup source
