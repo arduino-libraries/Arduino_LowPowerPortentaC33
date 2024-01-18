@@ -24,15 +24,8 @@ void LowPower::deepSleep(){
 }
 
 void LowPower::enableWakeupFromRTC(){
-    if(deepSleepWakeupSource == 0)
-        deepSleepWakeupSource = LPM_DEEP_STANDBY_CANCEL_SOURCE_RTC_ALARM;
-    else
-        deepSleepWakeupSource = deepSleepWakeupSource | LPM_DEEP_STANDBY_CANCEL_SOURCE_RTC_ALARM;
-
-    if(standbyWakeupSource == 0)
-        standbyWakeupSource = LPM_STANDBY_WAKE_SOURCE_RTCALM;
-    else
-        standbyWakeupSource = standbyWakeupSource | LPM_STANDBY_WAKE_SOURCE_RTCALM;
+    RenesasLowPowerConfig.deep_standby_cancel_source = LPM_DEEP_STANDBY_CANCEL_SOURCE_RTC_ALARM;
+    RenesasLowPowerConfig.standby_wake_sources = LPM_STANDBY_WAKE_SOURCE_RTCALM;
 }
  
 bool LowPower::enableWakeupFromPin(uint8_t pin, PinStatus direction){
