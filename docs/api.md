@@ -25,7 +25,7 @@ This class allows the user to put the device into different low-power states and
 ### `LowPower` <a id="class_low_power_1a096a38a40767b27b681330a514fd4e48" class="anchor"></a>
 
 ```cpp
-public LowPower()
+LowPower()
 ```
 
 Constructor for [LowPower](#class_low_power) class. Initializes the low power and sleep configurations.
@@ -34,7 +34,7 @@ Constructor for [LowPower](#class_low_power) class. Initializes the low power an
 ### `sleep` <a id="class_low_power_1a351563f87f8d1f118e9d77201fd59a55" class="anchor"></a>
 
 ```cpp
-public void sleep()
+void sleep()
 ```
 
 Puts the device into a standard sleep mode. This sleep mode consumes less power than the active mode but more than the deep sleep mode. The device will resume execution from the point where it entered the sleep mode.
@@ -43,7 +43,7 @@ Puts the device into a standard sleep mode. This sleep mode consumes less power 
 ### `deepSleep` <a id="class_low_power_1ada3410c10d04970e0898eb5f7f36ce55" class="anchor"></a>
 
 ```cpp
-public void deepSleep()
+void deepSleep()
 ```
 
 Puts the device into a deep sleep mode. The device consumes the least power in this mode but will reset when it wakes up effectively running the setup() function again.
@@ -52,7 +52,7 @@ Puts the device into a deep sleep mode. The device consumes the least power in t
 ### `enableWakeupFromPin` <a id="class_low_power_1a9ee83fbc2b670ac9490cd179b2e08138" class="anchor"></a>
 
 ```cpp
-public bool enableWakeupFromPin(uint8_t pin, PinStatus direction)
+bool enableWakeupFromPin(uint8_t pin, PinStatus direction)
 ```
 
 Enables wake-up of the device from a specified pin (A0, A1, A2, A3, A4, A5, D4, D7 ) 
@@ -65,7 +65,7 @@ Enables wake-up of the device from a specified pin (A0, A1, A2, A3, A4, A5, D4, 
 ### `enableWakeupFromRTC` <a id="class_low_power_1a91d86cab239a56506bf15e9d2139c097" class="anchor"></a>
 
 ```cpp
-public void enableWakeupFromRTC()
+void enableWakeupFromRTC()
 ```
 
 Enables wake-up of the device based on the Real-Time Clock (RTC).
