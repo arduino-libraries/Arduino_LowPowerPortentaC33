@@ -22,8 +22,6 @@ on:
 
 env:
   UNIVERSAL_SKETCH_PATHS: |
-        - extras/tests
-        - examples/AutomaticSleep
         - examples/SimpleDeepSleep
         - examples/WakeFromRTC
   SKETCHES_REPORTS_PATH: sketches-reports
