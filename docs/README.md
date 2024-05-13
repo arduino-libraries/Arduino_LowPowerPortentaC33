@@ -23,7 +23,7 @@ Here's an overview of the reduction in power usage that you can expect from this
 The wakeup source can be one of the deep-sleep enabled wakeup pins, and an RTC Alarm. You can select multiple pins and the RTC alarm to wake up the board. 
 
 #### Wakeup Pins
-This feature can be used when you want to wake up the board from external stimuli, such as sensors or user input. Some sensors have an interupt pin that you can connect to one of the wakeup pins (eg: most motion sensors), while some output voltage on a pin, (eg: Passive Infrared Sensors or user buttons).
+This feature can be used when you want to wake up the board from external stimuli, such as sensors or user input. Some sensors have an interrupt pin that you can connect to one of the wakeup pins (eg: most motion sensors), while some output voltage on a pin, (eg: Passive Infrared Sensors or user buttons).
 
 To select a wakeup pin just call `lowPower.setWakeupPin(<pin_number>, <direction>)`. The direction can be either **RISING** if you want to wake up when voltage is applied to a pin, or **FALLING** if you want to wake when no voltage is applied anymore. 
 
