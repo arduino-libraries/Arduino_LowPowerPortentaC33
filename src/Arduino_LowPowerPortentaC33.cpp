@@ -1,4 +1,4 @@
-#include "Arduino_Portenta_C33_LowPower.h"
+#include "Arduino_LowPowerPortentaC33.h"
 
 LowPower::LowPower(){
     RenesasLowPowerConfig.dtc_state_in_snooze = LPM_SNOOZE_DTC_DISABLE;

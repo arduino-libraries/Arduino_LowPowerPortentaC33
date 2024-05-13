@@ -1,7 +1,7 @@
 
 
 #include "RTC.h"
-#include "Arduino_Portenta_C33_LowPower.h"
+#include "Arduino_LowPowerPortentaC33.h"
 
 LowPower lowPower;
 RTCTime initialTime(1, Month::JANUARY, 2000, 12, 10, 00, DayOfWeek::TUESDAY, SaveLight::SAVING_TIME_ACTIVE);

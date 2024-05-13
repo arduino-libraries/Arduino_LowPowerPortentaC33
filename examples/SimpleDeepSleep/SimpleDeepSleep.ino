@@ -1,4 +1,4 @@
-#include "Arduino_Portenta_C33_LowPower.h"
+#include "Arduino_LowPowerPortentaC33.h"
 
 #define SLEEP_PIN 0
 #define WAKE_PIN A3
