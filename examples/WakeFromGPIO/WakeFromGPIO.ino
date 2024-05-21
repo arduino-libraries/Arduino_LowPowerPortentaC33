@@ -7,7 +7,7 @@ LowPower lowPower;
 
 
 void goToSleep(){
-    lowPower.sleep(); // lowPower.deepSleep();
+    lowPower.deepSleep(); // lowPower.deepSleep();
 }
 
 void setup(){

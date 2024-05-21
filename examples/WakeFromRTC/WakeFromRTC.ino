@@ -2,16 +2,82 @@
 
 #include "RTC.h"
 #include "Arduino_LowPowerPortentaC33.h"
+#include "Arduino_PMIC.h"
+
+
 
 LowPower lowPower;
 RTCTime initialTime(1, Month::JANUARY, 2000, 12, 10, 00, DayOfWeek::TUESDAY, SaveLight::SAVING_TIME_ACTIVE);
 
+
+void turnOffPeripherals(){
+    //stopETHClock();
+        // Turn off the external power regulator
+    PMIC.getControl() -> turnSw2Off(Sw2Mode::Normal);
+    PMIC.getControl() -> turnSw2Off(Sw2Mode::Sleep);
+    PMIC.getControl() -> turnSw2Off(Sw2Mode::Standby);
+
+    
+        // Turn off the Ethernet PHY, SDRAM, and USB PHY
+    PMIC.getControl() -> turnSw1Off(Sw1Mode::Normal);
+    PMIC.getControl() -> turnSw1Off(Sw1Mode::Sleep);
+    PMIC.getControl() -> turnSw1Off(Sw1Mode::Standby);
+
+
+    
+    
+    PMIC.getControl() -> turnLDO1Off(Ldo1Mode::Normal);
+    PMIC.getControl() -> turnLDO1Off(Ldo1Mode::Sleep);
+    PMIC.getControl() -> turnLDO1Off(Ldo1Mode::Standby);
+
+
+    // Turn off misc onboard chips
+    PMIC.getControl() -> turnLDO2Off(Ldo2Mode::Normal);
+    PMIC.getControl() -> turnLDO2Off(Ldo2Mode::Sleep);
+    PMIC.getControl() -> turnLDO2Off(Ldo2Mode::Standby);
+    
+
+    // Turn off the 1.2V for Ethernet
+    PMIC.getControl() -> turnLDO3Off(Ldo3Mode::Normal);
+    PMIC.getControl() -> turnLDO3Off(Ldo3Mode::Sleep);
+    PMIC.getControl() -> turnLDO3Off(Ldo3Mode::Standby);
+        delay(1);
+
+}
+
+void turnOnPeripherals(){
+       // startETHClock();
+ PMIC.getControl() -> turnLDO1On(Ldo1Mode::Normal);
+    PMIC.getControl() -> turnLDO1On(Ldo1Mode::Sleep);
+    PMIC.getControl() -> turnLDO1On(Ldo1Mode::Standby);
+
+    // Turn off misc onboard chips
+    PMIC.getControl() -> turnLDO2On(Ldo2Mode::Normal);
+    PMIC.getControl() -> turnLDO2On(Ldo2Mode::Sleep);
+    PMIC.getControl() -> turnLDO2On(Ldo2Mode::Standby);
+
+    // Turn off the 1.2V for Ethernet
+    PMIC.getControl() -> turnLDO3On(Ldo3Mode::Normal);
+    PMIC.getControl() -> turnLDO3On(Ldo3Mode::Sleep);
+    PMIC.getControl() -> turnLDO3On(Ldo3Mode::Standby);
+
+    // Turn off the Ethernet PHY, SDRAM, and USB PHY
+    PMIC.getControl() -> turnSw1On(Sw1Mode::Normal);
+    PMIC.getControl() -> turnSw1On(Sw1Mode::Sleep);
+    PMIC.getControl() -> turnSw1On(Sw1Mode::Standby);
+
+    // Turn off the external power regulator
+    PMIC.getControl() -> turnSw2On(Sw2Mode::Normal);
+    PMIC.getControl() -> turnSw2On(Sw2Mode::Sleep);
+    PMIC.getControl() -> turnSw2On(Sw2Mode::Standby);
+}
 
 void alarmCallback()
 {
   digitalWrite(LED_BUILTIN, HIGH);
   delay(1000);
   digitalWrite(LED_BUILTIN, LOW);
+  turnOffPeripherals();
   lowPower.deepSleep();
 }
 
@@ -50,8 +116,12 @@ bool sleepFor(int hours, int minutes, int seconds){
 
 
 void setup(){
+ 
+    PMIC.begin();
+
+    turnOnPeripherals();
     Serial.begin(9600);
-    //while(!Serial);
+
 
     lowPower = LowPower();
     lowPower.enableWakeupFromRTC();
@@ -65,9 +135,11 @@ void setup(){
         RTC.setTime(initialTime);
         sleepFor(0, 0, 1);
     }
-  
+    
+    turnOffPeripherals();
+    lowPower.deepSleep();
 }
 
 void loop(){
-    lowPower.deepSleep();
+    
 }
