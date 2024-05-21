@@ -33,17 +33,21 @@ Here's an overview of the reduction in power usage that you can expect from this
 #### Normal operating conditions
 ![](https://raw.githubusercontent.com/arduino-libraries/Arduino_LowPowerPortentaC33/main/extras/results/normal_usage_blink.png)
 
-#### Sleep Mode with peripherals off
-![](https://raw.githubusercontent.com/arduino-libraries/Arduino_LowPowerPortentaC33/main/extras/results/sleep_no_peripherals.png)
-
-#### Deep Sleep Mode with peripherals off
+#### Deep Sleep
+##### Peripherals off
 ![](https://raw.githubusercontent.com/arduino-libraries/Arduino_LowPowerPortentaC33/main/extras/results/deep_sleep_no_peripherals.png)
 
-#### Sleep Mode with peripherals on
+##### Peripherals on
+![](https://raw.githubusercontent.com/arduino-libraries/Arduino_LowPowerPortentaC33/main/extras/results/deep_sleep_peripherals_on.png)
+
+#### Sleep Mode 
+##### Peripherals off
+![](https://raw.githubusercontent.com/arduino-libraries/Arduino_LowPowerPortentaC33/main/extras/results/sleep_no_peripherals.png)
+
+##### Peripherals on
 ![](https://raw.githubusercontent.com/arduino-libraries/Arduino_LowPowerPortentaC33/main/extras/results/sleep_peripherals_on.png)
 
-#### Deep Sleep Mode with peripherals on
-![](https://raw.githubusercontent.com/arduino-libraries/Arduino_LowPowerPortentaC33/main/extras/results/deep_sleep_peripherals_on.png)
+
 
 
 > [!NOTE]  
