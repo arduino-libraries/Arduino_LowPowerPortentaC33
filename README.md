@@ -31,24 +31,21 @@ The Portenta C33 Low Power Library is a library designed to optimize power consu
 Here's an overview of the reduction in power usage that you can expect from this library. The screenshots below are taken from the nRF Power Profiler application using a Nordic PPK2 while running the blink sketch on the same board. 
 
 #### Normal operating conditions
-![](https://raw.githubusercontent.com/arduino-libraries/Arduino_LowPowerPortentaC33/main/extras/results/normal_usage_blink.png)
+![](docs/assets/normal_usage_blink.png)
 
 #### Deep Sleep
 ##### Peripherals off
-![](https://raw.githubusercontent.com/arduino-libraries/Arduino_LowPowerPortentaC33/main/extras/results/deep_sleep_no_peripherals.png)
+![](docs/assets/deep_sleep_no_peripherals.png)
 
 ##### Peripherals on
-![](https://raw.githubusercontent.com/arduino-libraries/Arduino_LowPowerPortentaC33/main/extras/results/deep_sleep_peripherals_on.png)
+![](docs/assets/deep_sleep_peripherals_on.png)
 
 #### Sleep Mode 
 ##### Peripherals off
-![](https://raw.githubusercontent.com/arduino-libraries/Arduino_LowPowerPortentaC33/main/extras/results/sleep_no_peripherals.png)
+![](docs/assets/sleep_no_peripherals.png)
 
 ##### Peripherals on
-![](https://raw.githubusercontent.com/arduino-libraries/Arduino_LowPowerPortentaC33/main/extras/results/sleep_peripherals_on.png)
-
-
-
+![](docs/assets/sleep_peripherals_on.png)
 
 > [!NOTE]  
 > Note, this library reduces the power usage of the microcontroller, not the entire board and it's peripherals (Wi-Fi module for example). If you would like to reach the maximum power reduction possible for a Portenta C33 board, please check out the [TurnPeripheralsOff Example](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/blob/main/examples/TurnPeripheralsOff/TurnPeripheralsOff.ino) that makes use of the [Arduino_PF1550 Library](https://github.com/arduino-libraries/Arduino_PF1550)
