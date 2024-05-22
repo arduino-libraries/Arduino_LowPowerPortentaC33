@@ -62,6 +62,8 @@ jobs:
           enable-deltas-report: true
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
           libraries: |
+            # Install the library from the local path.
+            - source-path: ./
             - name: Arduino_PF1550
 
       - name: Save sketches report as workflow artifact
