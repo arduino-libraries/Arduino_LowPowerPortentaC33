@@ -22,8 +22,9 @@ on:
 
 env:
   UNIVERSAL_SKETCH_PATHS: |
-        - examples/SimpleDeepSleep
+        - examples/WakeFromGPIO
         - examples/WakeFromRTC
+        - examples/TurnPeripheralsOff
   SKETCHES_REPORTS_PATH: sketches-reports
   SKETCHES_REPORTS_ARTIFACT_NAME: sketches-reports
 
