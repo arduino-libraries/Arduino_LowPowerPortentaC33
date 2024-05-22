@@ -61,6 +61,8 @@ jobs:
             ${{ matrix.board.additional-sketch-paths }}
           enable-deltas-report: true
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
+          libraries: |
+            - name: Arduino_PF1550
 
       - name: Save sketches report as workflow artifact
         uses: actions/upload-artifact@v4
