@@ -2,17 +2,11 @@
 
 [![Check Arduino](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/actions/workflows/check-arduino.yml/badge.svg)](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/actions/workflows/check-arduino.yml) [![Compile Examples](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/actions/workflows/compile-examples.yml/badge.svg)](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/actions/workflows/compile-examples.yml) [![Spell Check](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/actions/workflows/spell-check.yml/badge.svg)](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/actions/workflows/spell-check.yml) [![Sync Labels](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/actions/workflows/sync-labels.yml/badge.svg)](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/actions/workflows/sync-labels.yml)
 
-
 The Portenta C33 Low Power Library is a library designed to optimize power consumption for projects using the Portenta C33 boards, which are powered by the Renesas RA6M5 microcontroller. The library achieves this by providing access to various low power modes. These modes are essential for applications where power efficiency is crucial, such as in remote sensing, IoT devices, or battery-powered applications.
-
 
 ## Examples 
 * [WakeFromGPIO](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/blob/main/examples/WakeFromGPIO/WakeFromGPIO.ino) - This example demonstrates how you can use [the GPIO pins](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/blob/main/docs/README.md#wakeup-pins) to wake your board from sleep.
-
 * [WakeFromRTC](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/blob/main/examples/WakeFromRTC/WakeFromRTC.ino) - This example demonstrates how you can use the RTC to wake the board from sleep. 
-
-* [TurnPeripheralsOff](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/blob/main/examples/TurnPeripheralsOff/TurnPeripheralsOff.ino) - This example extends the [WakeFromGPIO](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/blob/main/examples/WakeFromGPIO/WakeFromGPIO.ino) example by enabling the user to disable several power lanes to achieve the minimum power consumption of about ~60µA.
-
 
 ## 😴 Sleep Modes
 
@@ -39,7 +33,6 @@ Here's an overview of the reduction in power usage that you can expect from this
 | Deep Sleep       | Off          | **58.99uA** |
 
 For more information about these measurements check out [this document](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/blob/main/docs/README.md)
-
 
 ## Usage
 ### Selecting a wakeup source
@@ -75,9 +68,4 @@ To make your board wake up on an RTC alarm you simply need to call `lowPower.set
 Use lowPower.sleep() for Sleep Mode and lowPower.deepSleep() for Deep Sleep Mode. Upon calling these methods the board will sleep until one of the wakeup events mentioned earlier arises. 
 
 
-
-
-> [!NOTE]  
-> Note, this library reduces the power usage of the microcontroller, not the entire board and it's peripherals (Wi-Fi module for example). If you would like to reach the maximum power reduction possible for a Portenta C33 board, please check out the [TurnPeripheralsOff Example](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/blob/main/examples/TurnPeripheralsOff/TurnPeripheralsOff.ino) that makes use of the [Arduino_PF1550 Library](https://github.com/arduino-libraries/Arduino_PF1550)
-
-For more information about this libraries check the [library documentation](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/blob/main/docs/README.md) or the [API Reference](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/blob/main/docs/api.md)
+For more information about this library check the [API Reference](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/blob/main/docs/api.md)
