@@ -22,8 +22,9 @@ on:
 
 env:
   UNIVERSAL_SKETCH_PATHS: |
-        - examples/SimpleDeepSleep
+        - examples/WakeFromGPIO
         - examples/WakeFromRTC
+        - examples/TurnPeripheralsOff
   SKETCHES_REPORTS_PATH: sketches-reports
   SKETCHES_REPORTS_ARTIFACT_NAME: sketches-reports
 
@@ -60,6 +61,10 @@ jobs:
             ${{ matrix.board.additional-sketch-paths }}
           enable-deltas-report: true
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
+          libraries: |
+            # Install the library from the local path.
+            - source-path: ./
+            - name: Arduino_PF1550
 
       - name: Save sketches report as workflow artifact
         uses: actions/upload-artifact@v4
