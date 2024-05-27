@@ -1,13 +1,7 @@
 #include "Arduino_LowPowerPortentaC33.h"
-#include "FspTimer.h"
 #include "r_lpm.h"
 
 LowPower::LowPower(){
-
-    //ldoConfig.pll1_ldo = LPM_LDO_STANDBY_OPERATION_DISABLED;
-    //ldoConfig.pll2_ldo = LPM_LDO_STANDBY_OPERATION_DISABLED;
-
-
     RenesasLowPowerConfig.dtc_state_in_snooze = LPM_SNOOZE_DTC_DISABLE;
     RenesasLowPowerConfig.power_supply_state = LPM_POWER_SUPPLY_DEEPCUT3 ;
     RenesasLowPowerConfig.output_port_enable = LPM_OUTPUT_PORT_ENABLE_HIGH_IMPEDANCE;
@@ -15,12 +9,6 @@ LowPower::LowPower(){
     RenesasLowPowerConfig.low_power_mode = LPM_MODE_DEEP;
     RenesasLowPowerConfig.standby_wake_sources = LPM_STANDBY_WAKE_SOURCE_IRQ15;
     RenesasLowPowerConfig.deep_standby_cancel_source = LPM_DEEP_STANDBY_CANCEL_SOURCE_IRQ15;
-
-   //RenesasLowPowerConfig.ldo_standby_cfg = ldoConfig;
-
-    
-
-
 }
 
 void LowPower::sleep(){
