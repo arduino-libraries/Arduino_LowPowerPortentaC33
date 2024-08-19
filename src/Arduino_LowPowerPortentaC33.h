@@ -3,6 +3,7 @@
 
 #include "r_lpm.h"
 #include "Arduino.h"
+#include "RTC.h"
 
 
 /**
@@ -40,13 +41,15 @@ public:
      */
     bool enableWakeupFromPin(uint8_t pin, PinStatus direction);
 
+    bool setWakeUpAlarm(RTCTime alarmTime);
+    bool setWakeUpAlarm(uint8_t hours, uint8_t minutes, uint8_t seconds);
+
+private:
     /**
      * Enables wake-up of the device based on the Real-Time Clock (RTC).
      */
     void enableWakeupFromRTC();
 
-
-private:
     /**
      * Retrieves the IRQ channel associated with a standby wake-up source for a given pin.
      * @param pin The pin number.
