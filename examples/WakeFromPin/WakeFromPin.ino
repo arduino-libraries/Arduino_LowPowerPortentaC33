@@ -1,6 +1,5 @@
 /*
 ********************************************************************************
-*                          WakeFromGPIO.ino
 *
 * This example demonstrates how to wake up the Portenta C33 from deep sleep using a GPIO pin.
 * The pin can be configured to wake up the device on a rising or falling edge, but not all pins are supported.
@@ -12,7 +11,7 @@
 * 
 * The example also demonstrates how to use the PF1550 PMIC to turn off the peripherals
 * before going to sleep and turn them back on after waking up.
-* uncomment #define TURN_PERIPHERALS_OFF on line 28 to enable this feature.
+* uncomment #define TURN_PERIPHERALS_OFF on line 33 to enable this feature.
 *
 * When the device is not sleeping it will blink the built-in LED every 100ms. 
 * 
@@ -31,8 +30,8 @@
 #include "Arduino_LowPowerPortentaC33.h"
 
 // #define TURN_PERIPHERALS_OFF
-#define SLEEP_PIN 0
-#define WAKE_PIN A3
+#define SLEEP_PIN 0 // Pin used to put the device to sleep
+#define WAKE_PIN A3 // Pin used to wake up the device
 
 LowPower lowPower;
 
@@ -59,12 +58,16 @@ LowPower lowPower;
 #endif
 
 void goToSleep(){
-    turnPeripheralsOff();
+    #ifdef TURN_PERIPHERALS_OFF
+        turnPeripheralsOff();
+    #endif
     lowPower.deepSleep(); 
 }
 
 void setup(){
     lowPower = LowPower();
+
+    // Register the callback function to put the device to sleep when the button is pressed
     attachInterrupt(digitalPinToInterrupt(SLEEP_PIN), goToSleep, RISING);
     lowPower.enableWakeupFromPin(WAKE_PIN, RISING);
     pinMode(LED_BUILTIN, OUTPUT);
@@ -76,10 +79,11 @@ void setup(){
 }
 
 void loop(){
+    // Blink the built-in LED every 500ms when the device is not sleeping    
     digitalWrite(LED_BUILTIN, HIGH);
-    delay(100);
+    delay(500);
     digitalWrite(LED_BUILTIN, LOW);
-    delay(100);
+    delay(500);
 }
 
 
