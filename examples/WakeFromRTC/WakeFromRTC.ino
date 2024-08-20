@@ -1,6 +1,4 @@
 /*
-********************************************************************************
-*
 * This example demonstrates how to use the RTC to wake up the
 * Portenta C33 from deep sleep. The device will go to sleep for 5 seconds and
 * then wake up. The built-in LED will blink every second.
@@ -88,7 +86,7 @@ void setup(){
     delay(5000); // lets the user see the led for 5 seconds
     
     // The device will go to sleep after 5 seconds and wake up after 5 seconds to light up the LED
-    // effectivelly creating the same visual effect as the blink sketch.
+    // effectively creating the same visual effect as the blink sketch.
     if(!lowPower.setWakeUpAlarm(0, 0, 5)){
          // Blink the red LED indefinitely to indicate an error
         while(true){

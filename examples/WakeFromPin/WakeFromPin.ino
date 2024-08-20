@@ -1,6 +1,4 @@
 /*
-********************************************************************************
-*
 * This example demonstrates how to wake up the Portenta C33 from deep sleep using a GPIO pin.
 * The pin can be configured to wake up the device on a rising or falling edge, but not all pins are supported.
 * Please check the README.md file for more information about the supported pins.
