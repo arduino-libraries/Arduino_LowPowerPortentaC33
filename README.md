@@ -64,7 +64,7 @@ This feature is particularly useful when you want to set the board to wake up at
 To make your board wake up on an RTC alarm you simply need to call `lowPower.setWakeUpAlarm(time)` or `lowPower.setWakeUpAlarm(hours, minutes, seconds)`. Check out this [example](./examples/WakeFromRTC/) for more details about setting up the RTC.
 
 
-### Initiating sleep modes
+### 🛏️ Initiating sleep modes
 Use `lowPower.sleep()` to enter the Sleep Mode and `lowPower.deepSleep()` to enter the Deep Sleep Mode. Upon calling these methods the board will sleep until one of the wake-up events mentioned earlier arises. 
 
 For more information on how to use this library check the [API Reference](./docs/api.md)
