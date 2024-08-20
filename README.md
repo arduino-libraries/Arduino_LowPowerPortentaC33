@@ -5,7 +5,7 @@
 The Portenta C33 Low Power Library is a library designed to optimize power consumption for projects using the Portenta C33 boards, which are powered by the Renesas RA6M5 microcontroller. The library achieves this by providing access to various low power modes. These modes are essential for applications where power efficiency is crucial, such as in remote sensing, IoT devices, or battery-powered applications.
 
 ## Examples 
-* [WakeFromPin](./examples/WakeFromPin/WakeFromPin.ino) - This example demonstrates how you can use [the GPIO pins](#wake-up-pins) to wake your board from sleep.
+* [WakeFromPin](./examples/WakeFromPin/WakeFromPin.ino) - This example demonstrates how you can use [the GPIO pins](#-wake-up-pins) to wake your board from sleep.
 * [WakeFromRTC](./examples/WakeFromRTC/WakeFromRTC.ino) - This example demonstrates how you can use the RTC to wake the board from sleep. 
 
 ## 💤 Sleep Modes
