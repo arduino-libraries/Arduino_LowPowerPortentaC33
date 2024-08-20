@@ -1,4 +1,4 @@
-name: Check Arduino
+name: Arduino Linter
 
 # See: https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
 on:

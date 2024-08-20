@@ -20,10 +20,54 @@ void LowPower::sleep(){
 void LowPower::deepSleep(){
     RenesasLowPowerConfig.low_power_mode = LPM_MODE_DEEP;
 
-    
-
     R_LPM_Open(&RenesasLowPowerControlBlock, &RenesasLowPowerConfig);
     R_LPM_LowPowerModeEnter(&RenesasLowPowerControlBlock);
+}
+
+bool LowPower::setWakeUpAlarm(RTCTime alarmTime){
+    this->enableWakeupFromRTC();
+
+    if(!RTC.isRunning()){
+        return false;
+    }
+
+    RTCTime currentTime;
+    if (!RTC.getTime(currentTime)) {
+        return false; // Failed to get current time
+    }
+
+    // Configure the alarm match criteria
+    AlarmMatch match;
+    match.addMatchSecond(); // Trigger the alarm when the seconds match
+    match.addMatchMinute(); // Trigger the alarm when the minutes match
+    match.addMatchHour();   // Trigger the alarm when the hours match
+    match.addMatchDay();    // Trigger the alarm when the days match
+    match.addMatchMonth();  // Trigger the alarm when the months match
+    match.addMatchYear();   // Trigger the alarm when the years match
+
+    return RTC.setAlarm(alarmTime, match);
+}
+
+bool LowPower::setWakeUpAlarm(uint8_t hours, uint8_t minutes, uint8_t seconds){
+
+    if(!RTC.isRunning()){
+        return false;
+    }
+
+    // Get the current time from the RTC
+    RTCTime currentTime;
+    if (!RTC.getTime(currentTime)) {
+        return false; // Failed to get current time
+    }
+
+    // Convert current time to UNIX timestamp and add the desired interval
+    time_t currentTimestamp = currentTime.getUnixTime();
+    currentTimestamp += hours * 3600 + minutes * 60 + seconds;
+
+    // Convert back to RTCTime
+    RTCTime alarmTime(currentTimestamp);
+
+    return this->setWakeUpAlarm(alarmTime);
 }
 
 void LowPower::enableWakeupFromRTC(){

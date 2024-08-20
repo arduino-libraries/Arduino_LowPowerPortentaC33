@@ -1,14 +1,11 @@
 /*
-********************************************************************************
-*                          WakeFromRTC.ino
-*
 * This example demonstrates how to use the RTC to wake up the
-* Portenta C33 from deep sleep. The device will go to sleep for 1 second and
+* Portenta C33 from deep sleep. The device will go to sleep for 5 seconds and
 * then wake up. The built-in LED will blink every second.
 *
 * The example also demonstrates how to use the PF1550 PMIC to turn off the peripherals
 * before going to sleep and turn them back on after waking up.
-* uncomment #define TURN_PERIPHERALS_OFF on line 24 to enable this feature.
+* uncomment #define TURN_PERIPHERALS_OFF to enable this feature.
 *
 * INSTRUCTIONS:
 * - Make sure you are running the latest version of the Renesas Core
@@ -16,11 +13,10 @@
 * - Select the Portenta C33 USB port from the Tools menu
 * - Upload the code to your Portenta C33
 *  
-* Original author: C. Dragomir (http://arduino.cc)
-
+* Initial author: C. Dragomir
 */
 
-// #define TURN_PERIPHERALS_OFF
+// #define TURN_PERIPHERALS_OFF // Uncomment this line to turn off the peripherals before going to sleep
 
 #include "RTC.h"
 #include "Arduino_LowPowerPortentaC33.h"
@@ -50,70 +46,58 @@ RTCTime initialTime(1, Month::JANUARY, 2000, 12, 10, 00, DayOfWeek::TUESDAY, Sav
     }
 #endif
 
-bool sleepFor(int hours, int minutes, int seconds)
-{
-    if(RTC.isRunning()){
-        // Get the current time from the RTC
-        RTCTime currentTime;
-        if (!RTC.getTime(currentTime)) {
-            return false; // Failed to get current time
-        }
+/**
+ * Initializes the Real-Time Clock (RTC) and sets the initial time if the RTC is not running.
+ * This initial time is a dummy time. You can obtain the current time from an NTP server and set it here.
+ */
+void initializeRealTimeClock(){
+    RTC.begin();
 
-        // Convert current time to UNIX timestamp and add the desired interval
-        time_t currentTimestamp = currentTime.getUnixTime();
-        currentTimestamp += hours * 3600 + minutes * 60 + seconds;
-
-        // Convert back to RTCTime
-        RTCTime alarmTime(currentTimestamp);
-
-
-        // Configure the alarm match criteria
-        AlarmMatch match;
-        match.addMatchSecond(); // Trigger the alarm when the seconds match
-        match.addMatchMinute(); // Trigger the alarm when the minutes match
-        match.addMatchHour();   // Trigger the alarm when the hours match
-
-        // Set the alarm 
-        if (!RTC.setAlarm(alarmTime, match)) {
-            return false; // Failed to set the alarm
-        }
-
-        // Enable the alarm
-        return true;
+    if (!RTC.isRunning()) {
+        RTC.setTime(initialTime);
     }
 }
 
-void setup(){
-    lowPower = LowPower();
-    lowPower.enableWakeupFromRTC();
+void goToSleep(){
+    #ifdef TURN_PERIPHERALS_OFF
+        // Turn peripherals off before going to sleep 
+        // LED turns off automatically as part of this process
+        turnPeripheralsOff();
+    #else
+        // Turn off the LED to indicate the device is going to sleep
+        digitalWrite(LED_BUILTIN, HIGH);
+    #endif
+    lowPower.deepSleep();
+}
 
+void setup(){
     #ifdef TURN_PERIPHERALS_OFF
         PMIC.begin();
         turnPeripheralsOn();
     #endif
 
-    // Initialize the RTC
-    RTC.begin();
+    initializeRealTimeClock();
 
-    // Set the initial time if the RTC is not running
-    if (!RTC.isRunning()) {
-        RTC.setTime(initialTime);
-    }
-
-    pinMode(LED_BUILTIN, OUTPUT); // Set the LED pin as an output
+    pinMode(LED_BUILTIN, OUTPUT); // Set the LED pin as an output    
+    pinMode(LEDR, OUTPUT); // Use the red LED to indicate errors
+    digitalWrite(LEDR, HIGH); // Turn off the red LED
     digitalWrite(LED_BUILTIN, LOW); // Turn on the LED
-    delay(1000); // lets the user see the led for 1 second
+
+    delay(5000); // lets the user see the led for 5 seconds
     
-    // The device will wake up every second and blink the LED
-    // effectivelly creating the same efect as the blink sketch
-    if(sleepFor(0, 0, 1)){
-        // turn peripherals off before going to sleep 
-        #ifdef TURN_PERIPHERALS_OFF
-            turnPeripheralsOff();
-        #endif
-        lowPower.deepSleep();
+    // The device will go to sleep after 5 seconds and wake up after 5 seconds to light up the LED
+    // effectively creating the same visual effect as the blink sketch.
+    if(!lowPower.setWakeUpAlarm(0, 0, 5)){
+         // Blink the red LED indefinitely to indicate an error
+        while(true){
+            digitalWrite(LEDR, HIGH);
+            delay(500);
+            digitalWrite(LEDR, LOW);
+            delay(500);
+        }
     }
+
+    goToSleep();
 }
 
-void loop(){
-}
+void loop(){}
