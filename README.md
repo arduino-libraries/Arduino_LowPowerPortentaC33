@@ -5,8 +5,8 @@
 The Portenta C33 Low Power Library is a library designed to optimize power consumption for projects using the Portenta C33 boards, which are powered by the Renesas RA6M5 microcontroller. The library achieves this by providing access to various low power modes. These modes are essential for applications where power efficiency is crucial, such as in remote sensing, IoT devices, or battery-powered applications.
 
 ## Examples 
-* [WakeFromGPIO](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/blob/main/examples/WakeFromGPIO/WakeFromGPIO.ino) - This example demonstrates how you can use [the GPIO pins](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/blob/main/docs/README.md#wakeup-pins) to wake your board from sleep.
-* [WakeFromRTC](https://github.com/arduino-libraries/Arduino_LowPowerPortentaC33/blob/main/examples/WakeFromRTC/WakeFromRTC.ino) - This example demonstrates how you can use the RTC to wake the board from sleep. 
+* [WakeFromPin](./examples/WakeFromPin/WakeFromPin.ino) - This example demonstrates how you can use [the GPIO pins](./docs/README.md#wakeup-pins) to wake your board from sleep.
+* [WakeFromRTC](./examples/WakeFromRTC/WakeFromRTC.ino) - This example demonstrates how you can use the RTC to wake the board from sleep. 
 
 ## 😴 Sleep Modes
 
@@ -38,7 +38,7 @@ For more information about these measurements check out [this document](https://
 ### Selecting a wakeup source
 The wakeup source can be one of the deep-sleep enabled wakeup pins, and an RTC Alarm. You can select multiple pins and the RTC alarm to wake up the board. 
 
-#### Wakeup Pins
+#### Wake-Up Pins
 This feature can be used when you want to wake up the board from external stimuli, such as sensors or user input. Some sensors have an interrupt pin that you can connect to one of the wakeup pins (eg: most motion sensors), while some output voltage on a pin, (eg: Passive Infrared Sensors or user buttons).
 
 To select a wakeup pin just call `lowPower.setWakeupPin(<pin_number>, <direction>)`. The direction can be either **RISING** if you want to wake up when voltage is applied to a pin, or **FALLING** if you want to wake when no voltage is applied anymore. 
