@@ -18,7 +18,8 @@ This class allows the user to put the device into different low-power states and
 | [`sleep`](#class_low_power_1a351563f87f8d1f118e9d77201fd59a55) | Puts the device into a standard sleep mode. This sleep mode consumes less power than the active mode but more than the deep sleep mode. The device will resume execution from the point where it entered the sleep mode. |
 | [`deepSleep`](#class_low_power_1ada3410c10d04970e0898eb5f7f36ce55) | Puts the device into a deep sleep mode. The device consumes the least power in this mode but will reset when it wakes up effectively running the setup() function again. |
 | [`enableWakeupFromPin`](#class_low_power_1a9ee83fbc2b670ac9490cd179b2e08138) | Enables wake-up of the device from a specified pin (A0, A1, A2, A3, A4, A5, D4, D7 )  |
-| [`enableWakeupFromRTC`](#class_low_power_1a91d86cab239a56506bf15e9d2139c097) | Enables wake-up of the device based on the Real-Time Clock (RTC). |
+| [`setWakeUpAlarm`](#class_low_power_1ad9ccfd5502d837138fde0e60e5dc70e6) |  |
+| [`setWakeUpAlarm`](#class_low_power_1aeaa63e5a37b37ccb0379e9d2ade99941) |  |
 
 ## Members
 
@@ -62,12 +63,19 @@ Enables wake-up of the device from a specified pin (A0, A1, A2, A3, A4, A5, D4, 
 * `direction` The direction of the interrupt that will wake up the device. (RISING, FALLING, CHANGE)
 <hr />
 
-### `enableWakeupFromRTC` <a id="class_low_power_1a91d86cab239a56506bf15e9d2139c097" class="anchor"></a>
+### `setWakeUpAlarm` <a id="class_low_power_1ad9ccfd5502d837138fde0e60e5dc70e6" class="anchor"></a>
 
 ```cpp
-void enableWakeupFromRTC()
+bool setWakeUpAlarm(RTCTime alarmTime)
 ```
 
-Enables wake-up of the device based on the Real-Time Clock (RTC).
+<hr />
+
+### `setWakeUpAlarm` <a id="class_low_power_1aeaa63e5a37b37ccb0379e9d2ade99941" class="anchor"></a>
+
+```cpp
+bool setWakeUpAlarm(uint8_t hours, uint8_t minutes, uint8_t seconds)
+```
+
 <hr />
 
