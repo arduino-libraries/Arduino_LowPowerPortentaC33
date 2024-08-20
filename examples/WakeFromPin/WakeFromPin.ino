@@ -5,32 +5,32 @@
 * The pin can be configured to wake up the device on a rising or falling edge, but not all pins are supported.
 * Please check the README.md file for more information about the supported pins.
 *
-* The example uses two buttons connected to pin 0 and A3:
-*     * The device will go to sleep when the button connected to pin 0 is pressed.
+* The example uses two buttons connected to pin D0 and A3:
+*     * The device will go to sleep when the button connected to pin D0 is pressed.
 *     * The device will wake up when the button connected to pin A3 is pressed.
 * 
 * The example also demonstrates how to use the PF1550 PMIC to turn off the peripherals
 * before going to sleep and turn them back on after waking up.
-* uncomment #define TURN_PERIPHERALS_OFF on line 33 to enable this feature.
+* uncomment #define TURN_PERIPHERALS_OFF to enable this feature.
 *
-* When the device is not sleeping it will blink the built-in LED every 100ms. 
+* When the device is not sleeping it will blink the built-in LED. 
 * 
 * INSTRUCTIONS:
-* - Make sure you are running the latest version of the Renesas Core
+* - Make sure you are running the latest version of the Portenta C33 Core
 * - Select the Portenta C33 board from the Tools menu
-* - Select the Portenta C33 USB port from the Tools menu
+* - Select the Portenta C33's USB port from the Tools menu
 * - Upload the code to your Portenta C33
-* - Connect a button to pin 0 and with a pull-up resistor to 3.3V
-* - Connect a button to pin A3 and with a pull-up resistor to 3.3V 
+* - Connect a button to pin D0 and ground (internal pull-up resistor is enabled)
+* - Connect a button to pin A3 and ground (internal pull-up resistor is enabled) 
 * (If you need information about how to wire the buttons check this link: https://docs.arduino.cc/built-in-examples/digital/Button/)
 * 
-* Original author: C. Dragomir (http://arduino.cc)
+* Initial author: C. Dragomir
 */
 
 #include "Arduino_LowPowerPortentaC33.h"
 
-// #define TURN_PERIPHERALS_OFF
-#define SLEEP_PIN 0 // Pin used to put the device to sleep
+// #define TURN_PERIPHERALS_OFF // Uncomment this line to turn off the peripherals before going to sleep
+#define SLEEP_PIN D0 // Pin used to put the device to sleep
 #define WAKE_PIN A3 // Pin used to wake up the device
 
 LowPower lowPower;
@@ -60,16 +60,22 @@ LowPower lowPower;
 void goToSleep(){
     #ifdef TURN_PERIPHERALS_OFF
         turnPeripheralsOff();
+    #else
+        // Turn off the built-in LED before going to sleep
+        digitalWrite(LED_BUILTIN, HIGH);
     #endif
     lowPower.deepSleep(); 
 }
 
 void setup(){
-    lowPower = LowPower();
+    // Register the sleep and wake-up pins as inputs with pull-up resistors
+    pinMode(SLEEP_PIN, INPUT_PULLUP);
+    pinMode(WAKE_PIN, INPUT_PULLUP);
 
     // Register the callback function to put the device to sleep when the button is pressed
     attachInterrupt(digitalPinToInterrupt(SLEEP_PIN), goToSleep, RISING);
     lowPower.enableWakeupFromPin(WAKE_PIN, RISING);
+    
     pinMode(LED_BUILTIN, OUTPUT);
 
     #ifdef TURN_PERIPHERALS_OFF
