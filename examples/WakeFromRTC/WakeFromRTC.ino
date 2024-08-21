@@ -26,7 +26,7 @@
 #endif
 
 LowPower lowPower;
-RTCTime initialTime(1, Month::JANUARY, 2000, 12, 10, 00, DayOfWeek::TUESDAY, SaveLight::SAVING_TIME_ACTIVE);
+RTCTime initialTime(1, Month::JANUARY, 2000, 12, 10, 00, DayOfWeek::SATURDAY, SaveLight::SAVING_TIME_ACTIVE);
 
 #ifdef TURN_PERIPHERALS_OFF
     void turnPeripheralsOff(){
