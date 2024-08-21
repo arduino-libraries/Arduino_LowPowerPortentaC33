@@ -24,15 +24,15 @@ void LowPower::deepSleep(){
     R_LPM_LowPowerModeEnter(&RenesasLowPowerControlBlock);
 }
 
-bool LowPower::setWakeUpAlarm(RTCTime alarmTime){
+bool LowPower::setWakeUpAlarm(RTCTime alarmTime, void (* const callbackFunction)(), RTClock * rtc){
     this->enableWakeupFromRTC();
 
-    if(!RTC.isRunning()){
+    if(!rtc->isRunning()){
         return false;
     }
 
     RTCTime currentTime;
-    if (!RTC.getTime(currentTime)) {
+    if (!rtc->getTime(currentTime)) {
         return false; // Failed to get current time
     }
 
@@ -45,18 +45,22 @@ bool LowPower::setWakeUpAlarm(RTCTime alarmTime){
     match.addMatchMonth();  // Trigger the alarm when the months match
     match.addMatchYear();   // Trigger the alarm when the years match
 
-    return RTC.setAlarm(alarmTime, match);
+    if (callbackFunction) {
+        return rtc->setAlarmCallback(callbackFunction, alarmTime, match);
+    } else {
+        return rtc->setAlarm(alarmTime, match);
+    }
 }
 
-bool LowPower::setWakeUpAlarm(uint8_t hours, uint8_t minutes, uint8_t seconds){
+bool LowPower::setWakeUpAlarm(uint8_t hours, uint8_t minutes, uint8_t seconds, void (* const callbackFunction)(), RTClock * rtc){
 
-    if(!RTC.isRunning()){
+    if(!rtc->isRunning()){
         return false;
     }
 
     // Get the current time from the RTC
     RTCTime currentTime;
-    if (!RTC.getTime(currentTime)) {
+    if (!rtc->getTime(currentTime)) {
         return false; // Failed to get current time
     }
 
@@ -67,7 +71,7 @@ bool LowPower::setWakeUpAlarm(uint8_t hours, uint8_t minutes, uint8_t seconds){
     // Convert back to RTCTime
     RTCTime alarmTime(currentTimestamp);
 
-    return this->setWakeUpAlarm(alarmTime);
+    return this->setWakeUpAlarm(alarmTime, callbackFunction, rtc);
 }
 
 void LowPower::enableWakeupFromRTC(){

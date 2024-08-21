@@ -41,8 +41,31 @@ public:
      */
     bool enableWakeupFromPin(uint8_t pin, PinStatus direction);
 
-    bool setWakeUpAlarm(RTCTime alarmTime);
-    bool setWakeUpAlarm(uint8_t hours, uint8_t minutes, uint8_t seconds);
+    /**
+     * Enables wake-up of the device based on the Real-Time Clock (RTC).
+     * The device will wake up at the specified time.
+     * @param alarmTime The time at which the device will wake up.
+     * @param callbackFunction The function to be called when the device wakes up.
+     * Specifying it only makes sense when used with sleep() and not deepSleep() as the device will reset when it wakes up from deep sleep.
+     * @param rtc The Real-Time Clock (RTC) to be used for setting the wake-up alarm.
+     * If not specified, the default RTC will be used.
+     * @return True if the wake-up alarm was set successfully, false otherwise.
+    */
+    bool setWakeUpAlarm(RTCTime alarmTime, void (* const callbackFunction)() = nullptr, RTClock * rtc = &RTC);
+    
+    /**
+     * Enables wake-up of the device based on the Real-Time Clock (RTC).
+     * The device will wake up at the specified time.
+     * @param hours The hour at which the device will wake up.
+     * @param minutes The minute at which the device will wake up.
+     * @param seconds The second at which the device will wake up.
+     * @param callbackFunction The function to be called when the device wakes up.
+     * Specifying it only makes sense when used with sleep() and not deepSleep() as the device will reset when it wakes up from deep sleep.
+     * @param rtc The Real-Time Clock (RTC) to be used for setting the wake-up alarm.
+     * If not specified, the default RTC will be used.
+     * @return True if the wake-up alarm was set successfully, false otherwise.
+     */
+    bool setWakeUpAlarm(uint8_t hours, uint8_t minutes, uint8_t seconds, void (* const callbackFunction)() = nullptr, RTClock * rtc = &RTC);
 
 private:
     /**
