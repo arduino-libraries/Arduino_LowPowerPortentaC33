@@ -71,8 +71,8 @@ void setup(){
     pinMode(WAKE_PIN, INPUT_PULLUP);
 
     // Register the callback function to put the device to sleep when the button is pressed
-    attachInterrupt(digitalPinToInterrupt(SLEEP_PIN), goToSleep, RISING);
-    lowPower.enableWakeupFromPin(WAKE_PIN, RISING);
+    attachInterrupt(digitalPinToInterrupt(SLEEP_PIN), goToSleep, FALLING);
+    lowPower.enableWakeupFromPin(WAKE_PIN, FALLING);
     
     pinMode(LED_BUILTIN, OUTPUT);
 
