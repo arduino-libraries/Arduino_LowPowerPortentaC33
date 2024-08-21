@@ -18,8 +18,8 @@
 * - Select the Portenta C33 board from the Tools menu
 * - Select the Portenta C33's USB port from the Tools menu
 * - Upload the code to your Portenta C33
-* - Connect a button to pin D0 and ground (internal pull-up resistor is enabled)
-* - Connect a button to pin A3 and ground (internal pull-up resistor is enabled) 
+* - Connect a button to pin D0 and ground with a pull-up resistor to 3.3V
+* - Connect a button to pin A3 and ground with a pull-up resistor to 3.3V 
 * (If you need information about how to wire the buttons check this link: https://docs.arduino.cc/built-in-examples/digital/Button/)
 * 
 * Initial author: C. Dragomir
@@ -56,25 +56,26 @@ LowPower lowPower;
 #endif
 
 void goToSleep(){
+    // Turn off the built-in LED before going to sleep
+    digitalWrite(LED_BUILTIN, HIGH);
+
     #ifdef TURN_PERIPHERALS_OFF
         turnPeripheralsOff();
-    #else
-        // Turn off the built-in LED before going to sleep
-        digitalWrite(LED_BUILTIN, HIGH);
     #endif
     lowPower.deepSleep(); 
 }
 
 void setup(){
-    // Register the sleep and wake-up pins as inputs with pull-up resistors
-    pinMode(SLEEP_PIN, INPUT_PULLUP);
-    pinMode(WAKE_PIN, INPUT_PULLUP);
+    // External pull-up resistor used for the buttons
+    pinMode(SLEEP_PIN, INPUT);
+    pinMode(WAKE_PIN, INPUT);
 
     // Register the callback function to put the device to sleep when the button is pressed
     attachInterrupt(digitalPinToInterrupt(SLEEP_PIN), goToSleep, FALLING);
     lowPower.enableWakeupFromPin(WAKE_PIN, FALLING);
     
     pinMode(LED_BUILTIN, OUTPUT);
+    digitalWrite(LED_BUILTIN, LOW); // Turn the built-in LED on to indicate the device is awake
 
     #ifdef TURN_PERIPHERALS_OFF
         PMIC.begin();
