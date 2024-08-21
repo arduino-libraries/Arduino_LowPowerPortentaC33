@@ -75,7 +75,6 @@ void setup(){
     lowPower.enableWakeupFromPin(WAKE_PIN, FALLING);
     
     pinMode(LED_BUILTIN, OUTPUT);
-    digitalWrite(LED_BUILTIN, LOW); // Turn the built-in LED on to indicate the device is awake
 
     #ifdef TURN_PERIPHERALS_OFF
         PMIC.begin();
@@ -85,9 +84,9 @@ void setup(){
 
 void loop(){
     // Blink the built-in LED every 500ms when the device is not sleeping    
-    digitalWrite(LED_BUILTIN, HIGH);
-    delay(500);
     digitalWrite(LED_BUILTIN, LOW);
+    delay(500);
+    digitalWrite(LED_BUILTIN, HIGH);
     delay(500);
 }
 
