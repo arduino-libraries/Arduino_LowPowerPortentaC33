@@ -34,7 +34,14 @@
 
 // #define TURN_PERIPHERALS_OFF // Uncomment this line to turn off the peripherals before going to sleep
 #define SLEEP_PIN D0 // Pin used to put the device to sleep
-#define WAKE_PIN A3 // Pin used to wake up the device
+
+/*
+The following pins can be used to wake up the device: A0, A1, A2, A3, A4, A5, D4, D7
+However turnPeripheralsOff() in this sketch turns off the power lane of the analog pins.
+This means they cannot sink current and therefore cannot be used to wake up the device. 
+Hency only D4 and D7 can be used to wake up the device in this configuration.
+*/
+#define WAKE_PIN D4
 
 LowPower lowPower;
 bool shouldSleep = false;
