@@ -19,7 +19,12 @@
 * - Select the Portenta C33's USB port from the Tools menu
 * - Upload the code to your Portenta C33
 * - Connect a button to pin D0 and ground with a pull-up resistor to 3.3V
-* - Connect a button to pin A3 and ground with a pull-up resistor to 3.3V 
+* - Connect a button to pin D4 and ground with a pull-up resistor to 3.3V 
+*   
+*   For maximum power saving use external pull-up resistors.
+*   You will need to power them separately as the 3.3V pin on the board 
+*   is turned off when the device goes to sleep and TURN_PERIPHERALS_OFF is enabled.
+*   Alternatively, use pinMode(<pin>, INPUT_PULLUP) for the pins and connect the buttons to ground.
 * (If you need information about how to wire the buttons check this link: https://docs.arduino.cc/built-in-examples/digital/Button/)
 * 
 * Initial author: C. Dragomir
@@ -61,7 +66,7 @@ void goToSleep(){
 }
 
 void setup(){
-    // External pull-up resistor used for the buttons
+    // External pull-up resistor used for the buttons for maximum power saving
     pinMode(SLEEP_PIN, INPUT);
     pinMode(WAKE_PIN, INPUT);
 
