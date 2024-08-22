@@ -32,6 +32,7 @@
 #define WAKE_PIN A3 // Pin used to wake up the device
 
 LowPower lowPower;
+bool shouldSleep = false;
 
 #ifdef TURN_PERIPHERALS_OFF
     #include "Arduino_PMIC.h"
@@ -56,13 +57,7 @@ LowPower lowPower;
 #endif
 
 void goToSleep(){
-    // Turn off the built-in LED before going to sleep
-    digitalWrite(LED_BUILTIN, HIGH);
-
-    #ifdef TURN_PERIPHERALS_OFF
-        turnPeripheralsOff();
-    #endif
-    lowPower.deepSleep(); 
+    shouldSleep = true;
 }
 
 void setup(){
@@ -83,6 +78,17 @@ void setup(){
 }
 
 void loop(){
+    if(shouldSleep){
+        // Turn off the built-in LED before going to sleep
+        digitalWrite(LED_BUILTIN, HIGH);
+
+        #ifdef TURN_PERIPHERALS_OFF
+            turnPeripheralsOff();
+        #endif
+        lowPower.deepSleep(); 
+        shouldSleep = false;
+    }
+
     // Blink the built-in LED every 500ms when the device is not sleeping    
     digitalWrite(LED_BUILTIN, LOW);
     delay(500);
